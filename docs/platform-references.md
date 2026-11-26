@@ -1,8 +1,8 @@
 # 플랫폼 공식 근거
 
-[앱 기획 표준 v0.1](../SPEC.md) 의 낱말 가운데 개발에 바로 걸리는 것이 Android 와 iOS 공식 문서의 어느 문장에서 나왔는지 모았다. 메모리 상태의 유지 여부, 저장소 종류, 화면 이동, 백그라운드 작업, 알림이 대상이다. 두 플랫폼에서 뜻이 통하는 낱말만 표준에 넣었고, 다르게 동작하는 곳은 [두 플랫폼이 다르게 동작하는 곳](#두-플랫폼이-다르게-동작하는-곳) 에 적었다.
+[앱 기획 쓰는 법 v0.1](../SPEC.md) 의 낱말 가운데 개발에 바로 걸리는 것이 Android 와 iOS 공식 문서의 어느 문장에서 나왔는지 모았다. 메모리 상태의 유지 여부, 저장소 종류, 화면 이동, 백그라운드 작업, 알림이 대상이다. 두 플랫폼에서 뜻이 통하는 낱말만 형식에 넣었고, 다르게 동작하는 곳은 [두 플랫폼이 다르게 동작하는 곳](#두-플랫폼이-다르게-동작하는-곳) 에 적었다.
 
-앱 기획 표준은 앱의 화면, 값, 동작을 기획자와 개발자가 한 파일에 YAML 로 적는 형식이다. 명세를 쓰는 사람이 낱말의 뜻을 플랫폼 동작과 맞춰 보거나, 개발자가 명세의 낱말을 어떤 API 로 만들지 찾을 때 이 노트를 쓴다. 이 노트에 나오는 표준의 낱말은 다음과 같다.
+앱 기획 쓰는 법은 앱의 화면, 값, 동작을 기획자와 개발자가 한 파일에 YAML 로 적는 형식이다. 명세를 쓰는 사람이 낱말의 뜻을 플랫폼 동작과 맞춰 보거나, 개발자가 명세의 낱말을 어떤 API 로 만들지 찾을 때 이 노트를 쓴다. 이 노트에 나오는 형식의 낱말은 다음과 같다.
 
 - `상태` 와 `소스`: 화면에 보이거나 판단에 쓰는 값과, 그 값이 있는 곳. 소스는 네트워크, 디스크, 메모리, 기기, 계산 가운데 하나다
 - `구성 변경에도 유지`, `프로세스 종료에도 유지`: 소스가 메모리인 상태에 예, 아니오로 적는 두 질문
@@ -15,7 +15,7 @@
 
 ## 낱말 대응표
 
-| 표준의 낱말 | Android | iOS |
+| 형식의 낱말 | Android | iOS |
 |---|---|---|
 | `구성 변경에도 유지: 예` | ViewModel | 화면 회전 때 화면이나 상태를 다시 만든다는 문장을 찾지 못했다 |
 | `프로세스 종료에도 유지: 예` | Saved state (`rememberSaveable`, `SavedStateHandle`) | 상태 복원 (`SceneStorage`, UIKit 의 state preservation) |
@@ -52,7 +52,7 @@
 
 ## 메모리 상태의 유지 여부
 
-Android 의 UI 상태 저장 문서([Save UI states](https://developer.android.com/topic/libraries/architecture/saving-states?hl=en))에 세 가지 방법을 견준 표가 있다. 표준의 두 질문은 이 표의 둘째 줄과 셋째 줄이다.
+Android 의 UI 상태 저장 문서([Save UI states](https://developer.android.com/topic/libraries/architecture/saving-states?hl=en))에 세 가지 방법을 견준 표가 있다. 형식의 두 질문은 이 표의 둘째 줄과 셋째 줄이다.
 
 | | ViewModel | Saved state | Persistent storage |
 |---|---|---|---|
@@ -65,13 +65,13 @@ Android 의 UI 상태 저장 문서([Save UI states](https://developer.android.c
 >
 > However, the system may destroy the application process while the user is away interacting with other apps.
 
-풀이. 사용자는 화면을 돌려도 화면 상태가 그대로이기를 바란다. 그리고 사용자가 다른 앱을 쓰는 사이 시스템이 앱 프로세스를 종료할 수 있다. 표준의 `구성 변경에도 유지` 와 `프로세스 종료에도 유지` 가 이 두 상황을 묻는다. 표의 넷째 줄(사용자가 화면을 완전히 닫음) 뒤에도 남아야 하는 값은 맨 오른쪽 칸뿐이고, 표준에서는 소스를 디스크나 네트워크로 적는다.
+풀이. 사용자는 화면을 돌려도 화면 상태가 그대로이기를 바란다. 그리고 사용자가 다른 앱을 쓰는 사이 시스템이 앱 프로세스를 종료할 수 있다. 형식의 `구성 변경에도 유지` 와 `프로세스 종료에도 유지` 가 이 두 상황을 묻는다. 표의 넷째 줄(사용자가 화면을 완전히 닫음) 뒤에도 남아야 하는 값은 맨 오른쪽 칸뿐이고, 형식에서는 소스를 디스크나 네트워크로 적는다.
 
 > Usually, data stored in saved state is transient state that depends on user input or navigation.
 
 같은 표의 Data limitations 줄은 Saved state 칸에 "only for primitive types and simple, small objects such as String" 이라고 적는다.
 
-풀이. 프로세스 종료 뒤에 되살리는 값은 입력이나 화면 이동에 딸린 작은 값이어야 한다. 표준이 `프로세스 종료에도 유지: 예` 를 입력하던 글자, 고른 탭 같은 작은 값에만 쓰라고 한 이유다.
+풀이. 프로세스 종료 뒤에 되살리는 값은 입력이나 화면 이동에 딸린 작은 값이어야 한다. 형식이 `프로세스 종료에도 유지: 예` 를 입력하던 글자, 고른 탭 같은 작은 값에만 쓰라고 한 이유다.
 
 구성 변경이 무엇인지는 [Handle configuration changes](https://developer.android.com/guide/topics/resources/runtime-changes?hl=en) 가 나열한다.
 
@@ -81,7 +81,7 @@ Android 의 UI 상태 저장 문서([Save UI states](https://developer.android.c
 
 > The system recreates an Activity when a configuration change occurs.
 
-풀이. 구성 변경은 회전만이 아니다. 화면 크기, 글자 크기, 언어, 다크 모드도 들어가고, 이때 시스템이 화면(Activity)을 다시 만든다. 표준의 풀이 "화면 회전, 다크 모드 전환, 글자 크기나 언어 변경, 창 크기 변경" 이 이 목록에서 나왔다.
+풀이. 구성 변경은 회전만이 아니다. 화면 크기, 글자 크기, 언어, 다크 모드도 들어가고, 이때 시스템이 화면(Activity)을 다시 만든다. 형식의 풀이 "화면 회전, 다크 모드 전환, 글자 크기나 언어 변경, 창 크기 변경" 이 이 목록에서 나왔다.
 
 iOS 쪽 문장은 다음과 같다.
 
@@ -121,7 +121,7 @@ iOS 쪽 문장은 다음과 같다.
 >
 > UI element state refers to properties intrinsic to UI elements that influence how they are rendered.
 
-풀이. Android 문서는 화면이 보여 줄 내용인 상태와 UI 요소 하나에 딸린 상태를 나눈다. 표준에서 화면에 적는 상태와 컴포넌트에 적는 상태가 이 구분이다.
+풀이. Android 문서는 화면이 보여 줄 내용인 상태와 UI 요소 하나에 딸린 상태를 나눈다. 형식에서 화면에 적는 상태와 컴포넌트에 적는 상태가 이 구분이다.
 
 [Data layer](https://developer.android.com/topic/architecture/data-layer?hl=en)
 
@@ -129,7 +129,7 @@ iOS 쪽 문장은 다음과 같다.
 >
 > Business-oriented operations cannot be canceled. They should survive process death.
 
-풀이. 화면에 딸린 일은 사용자가 화면을 떠나면 취소되고, 꼭 끝내야 하는 일은 프로세스가 종료돼도 이어져야 한다. 표준의 규칙 "화면이 닫히거나 앱이 종료돼도 끝까지 해야 하는 일은 백그라운드 작업으로 적는다" 가 여기서 나왔다.
+풀이. 화면에 딸린 일은 사용자가 화면을 떠나면 취소되고, 꼭 끝내야 하는 일은 프로세스가 종료돼도 이어져야 한다. 형식의 규칙 "화면이 닫히거나 앱이 종료돼도 끝까지 해야 하는 일은 백그라운드 작업으로 적는다" 가 여기서 나왔다.
 
 ## 소스
 
@@ -145,7 +145,7 @@ iOS 쪽 문장은 다음과 같다.
 >
 > When writing data in offline-first apps, there are three strategies to consider.
 
-풀이. 값이 있는 곳을 파일, 네트워크, 로컬 데이터베이스, 메모리 캐시로 나누는 것은 Android 데이터 레이어 문서의 구분과 같다. 연결이 없어도 쓰는 앱은 기기 저장소를 기준으로 삼으라고 한다. 표준에서 네트워크 상태의 `보관`(받은 값을 기기 어디에 두는지)에 디스크 저장소를 적거나, 표준의 달리기 기록 앱 예시처럼 소스를 디스크로 적고 백그라운드 작업으로 서버에 올리는 것이 이 구성이다. 연결이 없을 때 쓰기를 어떻게 할지는 세 가지가 있다고 하니, 연결이 없을 때 한 일을 어떻게 할지를 명세에 적어야 한다.
+풀이. 값이 있는 곳을 파일, 네트워크, 로컬 데이터베이스, 메모리 캐시로 나누는 것은 Android 데이터 레이어 문서의 구분과 같다. 연결이 없어도 쓰는 앱은 기기 저장소를 기준으로 삼으라고 한다. 형식에서 네트워크 상태의 `보관`(받은 값을 기기 어디에 두는지)에 디스크 저장소를 적거나, 형식의 달리기 기록 앱 예시처럼 소스를 디스크로 적고 백그라운드 작업으로 서버에 올리는 것이 이 구성이다. 연결이 없을 때 쓰기를 어떻게 할지는 세 가지가 있다고 하니, 연결이 없을 때 한 일을 어떻게 할지를 명세에 적어야 한다.
 
 저장소 종류는 [Data and file storage overview](https://developer.android.com/training/data-storage?hl=en) 의 구분을 따랐다.
 
@@ -153,7 +153,7 @@ iOS 쪽 문장은 다음과 같다.
 >
 > Store structured data in a private database using the Room persistence library.
 
-풀이. 첫 문장이 Preferences, 둘째가 Databases 설명이다. 표준의 `설정` 과 `디비` 다.
+풀이. 첫 문장이 Preferences, 둘째가 Databases 설명이다. 형식의 `설정` 과 `디비` 다.
 
 iOS 쪽은 다음과 같다.
 
@@ -169,7 +169,7 @@ iOS 쪽은 다음과 같다.
 
 ([Optimizing your app's data for iCloud backup](https://developer.apple.com/documentation/foundation/optimizing-your-app-s-data-for-icloud-backup))
 
-풀이. UserDefaults 는 암호화하지 않고 디스크에 둔다. 토큰 같은 값은 Keychain 에 둔다. 표준이 `설정` 과 `보안 저장소` 를 다른 종류로 둔 이유다. 종류가 `파일` 인 저장소는 시스템이 지워도 되는 파일인지를 `설명` 에 적어야 한다.
+풀이. UserDefaults 는 암호화하지 않고 디스크에 둔다. 토큰 같은 값은 Keychain 에 둔다. 형식이 `설정` 과 `보안 저장소` 를 다른 종류로 둔 이유다. 종류가 `파일` 인 저장소는 시스템이 지워도 되는 파일인지를 `설명` 에 적어야 한다.
 
 ## 화면 이동
 
@@ -183,13 +183,13 @@ iOS 쪽은 다음과 같다.
 >
 > When deep linking to a destination within your app's task, any existing back stack for your app's task is removed and replaced with the deep-linked back stack.
 
-풀이. 앱에는 고정된 시작 화면이 하나 있고, 로그인처럼 조건에 따라 보이는 화면은 시작 화면이 아니며, 시작 화면은 쌓인 화면의 맨 아래에 있다. 링크로 들어오면 쌓여 있던 화면을 새 것으로 바꾼다. 표준의 `시작 화면` 풀이, `비우고 이동` 의 뜻(시작 화면 위에 새 화면만 남긴다), `링크` 로 들어왔을 때의 기본 동작이 이 네 문장을 따른다.
+풀이. 앱에는 고정된 시작 화면이 하나 있고, 로그인처럼 조건에 따라 보이는 화면은 시작 화면이 아니며, 시작 화면은 쌓인 화면의 맨 아래에 있다. 링크로 들어오면 쌓여 있던 화면을 새 것으로 바꾼다. 형식의 `시작 화면` 풀이, `비우고 이동` 의 뜻(시작 화면 위에 새 화면만 남긴다), `링크` 로 들어왔을 때의 기본 동작이 이 네 문장을 따른다.
 
 [Nested graphs](https://developer.android.com/guide/navigation/design/nested-graphs?hl=en)
 
 > Login flows, wizards, or other subflows within your app are usually best represented as nested navigation graphs.
 
-풀이. 표준의 `흐름` 이 이것이다.
+풀이. 형식의 `흐름` 이 이것이다.
 
 iOS 쪽은 다음과 같다.
 
@@ -211,7 +211,7 @@ iOS 쪽은 다음과 같다.
 >
 > Will there be a bad user experience if the task is deferred or interrupted?
 
-풀이. 둘째 질문이 표준의 `미뤄도 됨` 이다.
+풀이. 둘째 질문이 형식의 `미뤄도 됨` 이다.
 
 [Define work requests](https://developer.android.com/develop/background-work/background-tasks/persistent/getting-started/define-work?hl=en)
 
@@ -223,7 +223,7 @@ iOS 쪽은 다음과 같다.
 >
 > The minimum repeat interval that can be defined is 15 minutes (same as the JobScheduler API).
 
-풀이. 조건은 전부 맞아야 하고, 도는 중에 안 맞게 되면 멈췄다가 다시 맞으면 다시 한다. 표준의 `조건` 풀이가 이 두 문장이다. `다시 시도` 에 적는 간격은 일정하게 늘리거나 두 배씩 늘리는 두 가지가 있다. 되풀이하는 작업의 `언제` 를 15분보다 짧게 적으면 WorkManager 로는 만들 수 없다.
+풀이. 조건은 전부 맞아야 하고, 도는 중에 안 맞게 되면 멈췄다가 다시 맞으면 다시 한다. 형식의 `조건` 풀이가 이 두 문장이다. `다시 시도` 에 적는 간격은 일정하게 늘리거나 두 배씩 늘리는 두 가지가 있다. 되풀이하는 작업의 `언제` 를 15분보다 짧게 적으면 WorkManager 로는 만들 수 없다.
 
 [Managing work](https://developer.android.com/develop/background-work/background-tasks/persistent/how-to/manage-work?hl=en)
 
@@ -235,7 +235,7 @@ iOS 쪽은 다음과 같다.
 >
 > APPEND the new work to the end of the existing work.
 
-풀이. 표준의 `겹치면` 값 `건너뜀`, `바꿈`, `줄 세움` 이 차례로 KEEP, REPLACE, APPEND 다. 같은 작업인지를 이름으로 가르는 것도 여기서 왔다.
+풀이. 형식의 `겹치면` 값 `건너뜀`, `바꿈`, `줄 세움` 이 차례로 KEEP, REPLACE, APPEND 다. 같은 작업인지를 이름으로 가르는 것도 여기서 왔다.
 
 [Schedule alarms](https://developer.android.com/develop/background-work/services/alarms?hl=en)
 
@@ -247,7 +247,7 @@ iOS 쪽은 다음과 같다.
 
 > Foreground services show a status bar notification, to make users aware that your app is performing a task in the foreground and is consuming system resources.
 
-풀이. 정확한 시각이 꼭 필요한 앱만 정확한 알람을 쓰고, 될 수 있으면 정확하지 않은 알람을 쓰라고 한다. `미뤄도 됨: 아니오` 는 꼭 필요한 작업에만 적어야 한다. 화면을 꺼도 계속되는 일은 사용자가 알 수 있게 알림을 띄워야 하고, 표준의 `진행 알림` 이 그것이다.
+풀이. 정확한 시각이 꼭 필요한 앱만 정확한 알람을 쓰고, 될 수 있으면 정확하지 않은 알람을 쓰라고 한다. `미뤄도 됨: 아니오` 는 꼭 필요한 작업에만 적어야 한다. 화면을 꺼도 계속되는 일은 사용자가 알 수 있게 알림을 띄워야 하고, 형식의 `진행 알림` 이 그것이다.
 
 iOS 쪽은 다음과 같다.
 
@@ -267,7 +267,7 @@ iOS 쪽은 다음과 같다.
 
 ([earliestBeginDate](https://developer.apple.com/documentation/backgroundtasks/bgtaskrequest/earliestbegindate))
 
-풀이. iOS 의 예약 작업은 실행 시각을 시스템이 정한다. 짧은 갱신 작업은 30초까지, 긴 처리 작업은 기기가 쉬고 있을 때만 돈다. 적어 준 날짜는 그보다 일찍 돌지 않는다는 뜻일 뿐이다. 표준의 `미뤄도 됨: 예` 에 해당하고, `아니오` 에 해당하는 작업 API 는 찾지 못했다.
+풀이. iOS 의 예약 작업은 실행 시각을 시스템이 정한다. 짧은 갱신 작업은 30초까지, 긴 처리 작업은 기기가 쉬고 있을 때만 돈다. 적어 준 날짜는 그보다 일찍 돌지 않는다는 뜻일 뿐이다. 형식의 `미뤄도 됨: 예` 에 해당하고, `아니오` 에 해당하는 작업 API 는 찾지 못했다.
 
 > If the user terminates the app from the multitasking screen, the system cancels all of the session's background transfers.
 
@@ -277,7 +277,7 @@ iOS 쪽은 다음과 같다.
 
 ([Pushing background updates to your app](https://developer.apple.com/documentation/usernotifications/pushing-background-updates-to-your-app))
 
-풀이. 사용자가 앱을 직접 종료하면 백그라운드 전송이 취소된다. 화면에 보이지 않는 푸시로 앱을 깨우는 방법은 전달이 보장되지 않는다. 표준이 서버 푸시로 시작하는 작업에는 못 받았을 때 값을 맞추는 방법을 적으라고 한 이유다.
+풀이. 사용자가 앱을 직접 종료하면 백그라운드 전송이 취소된다. 화면에 보이지 않는 푸시로 앱을 깨우는 방법은 전달이 보장되지 않는다. 형식이 서버 푸시로 시작하는 작업에는 못 받았을 때 값을 맞추는 방법을 적으라고 한 이유다.
 
 ## 알림
 
@@ -287,9 +287,9 @@ iOS 쪽은 다음과 같다.
 >
 > After you create a notification channel, you can't change the notification behaviors.
 
-풀이. Android 의 알림은 모두 채널에 속하고, 채널을 만든 뒤에는 앱이 동작을 바꿀 수 없다. 표준의 `분류` 가 채널이다. 한 번 내보내면 못 바꾸니 처음에 정해야 한다.
+풀이. Android 의 알림은 모두 채널에 속하고, 채널을 만든 뒤에는 앱이 동작을 바꿀 수 없다. 형식의 `분류` 가 채널이다. 한 번 내보내면 못 바꾸니 처음에 정해야 한다.
 
-같은 문서의 중요도 표는 가장 높은 단계를 "Makes a sound and appears as a heads-up notification.", 그다음을 "Makes a sound.", 그다음을 "Makes no sound." 로 설명한다. 표준의 `높음`, `보통`, `낮음` 이 이 셋이다.
+같은 문서의 중요도 표는 가장 높은 단계를 "Makes a sound and appears as a heads-up notification.", 그다음을 "Makes a sound.", 그다음을 "Makes no sound." 로 설명한다. 형식의 `높음`, `보통`, `낮음` 이 이 셋이다.
 
 [Notification runtime permission](https://developer.android.com/develop/ui/views/notifications/notification-permission?hl=en) 은 Android 13 이상에 새로 설치한 앱은 "notifications are off by default" 라고 적는다.
 
@@ -301,19 +301,19 @@ iOS 쪽은 다음과 같다.
 
 ([Asking permission to use notifications](https://developer.apple.com/documentation/usernotifications/asking-permission-to-use-notifications))
 
-풀이. 두 플랫폼 모두 알림을 보내려면 사용자의 허락이 필요하고, iOS 는 시스템 창이 처음 한 번만 뜬다. 명세에 알림 권한을 언제 묻는지 적어야 한다. 표준에서는 동작의 `기기` 단계에 알림 권한을 요청한다고 적는다.
+풀이. 두 플랫폼 모두 알림을 보내려면 사용자의 허락이 필요하고, iOS 는 시스템 창이 처음 한 번만 뜬다. 명세에 알림 권한을 언제 묻는지 적어야 한다. 형식에서는 동작의 `기기` 단계에 알림 권한을 요청한다고 적는다.
 
 > The system adds the notification to the notification list without lighting up the screen or playing a sound.
 
 ([UNNotificationInterruptionLevel.passive](https://developer.apple.com/documentation/usernotifications/unnotificationinterruptionlevel/passive))
 
-풀이. iOS 의 가장 낮은 중단 수준 설명이다. 표준의 `중요도: 낮음` 과 같은 뜻이다.
+풀이. iOS 의 가장 낮은 중단 수준 설명이다. 형식의 `중요도: 낮음` 과 같은 뜻이다.
 
 > If your delegate does not implement this method, the system behaves as if you had passed the UNNotificationPresentationOptionNone option to the completionHandler block.
 
 ([userNotificationCenter(_:willPresent:withCompletionHandler:)](https://developer.apple.com/documentation/usernotifications/unusernotificationcenterdelegate/usernotificationcenter(_:willpresent:withcompletionhandler:)))
 
-풀이. 앱을 보고 있는 중에 온 알림은 앱이 받아서 어떻게 보일지 정한다. 이 메서드를 만들지 않으면 아무것도 표시되지 않는다. 표준이 `앱을 보고 있을 때` 를 꼭 적게 한 이유다.
+풀이. 앱을 보고 있는 중에 온 알림은 앱이 받아서 어떻게 보일지 정한다. 이 메서드를 만들지 않으면 아무것도 표시되지 않는다. 형식이 `앱을 보고 있을 때` 를 꼭 적게 한 이유다.
 
 > Specify the conditions for delivering your notification using a UNCalendarNotificationTrigger, UNTimeIntervalNotificationTrigger, or UNLocationNotificationTrigger object.
 
@@ -330,7 +330,7 @@ iOS 쪽은 다음과 같다.
 3. 알림 분류. Android 는 채널 단위로 사용자가 기기 설정에서 켜고 끈다. iOS 에서 여기에 대응하는 개념은 찾지 못했다. 종류별로 켜고 끄게 하려면 iOS 에서는 앱 안에 설정 화면을 만들어야 할 수 있다
 4. 구성 변경. Android 는 화면을 다시 만든다. iOS 에서 같은 일이 있는지는 문장을 찾지 못했다
 5. 알림 권한. Android 13 이상은 새로 설치하면 알림이 꺼져 있고 언제 물을지는 앱이 정한다. iOS 는 시스템 창이 처음 한 번만 뜬다
-6. 링크나 알림으로 들어왔을 때 쌓이는 화면. Android 내비게이션 원칙은 쌓여 있던 화면을 바꾼다고 정해 두었다. iOS 는 앱이 정한다. 표준은 `링크` 의 기본 동작을 Android 원칙에 맞췄다
+6. 링크나 알림으로 들어왔을 때 쌓이는 화면. Android 내비게이션 원칙은 쌓여 있던 화면을 바꾼다고 정해 두었다. iOS 는 앱이 정한다. 형식은 `링크` 의 기본 동작을 Android 원칙에 맞췄다
 
 ## 확인하지 못한 것
 

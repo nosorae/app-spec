@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""앱 기획 표준 v0.1 검사기.
+"""앱 기획 쓰는 법 v0.1 검사기.
 
 쓰는 법
   python3 appspec_check.py 명세.yaml              파일 하나
@@ -11,8 +11,8 @@
 
 .yaml, .yml 은 파일 전체를 읽고 .md 는 ```yaml 블록만 읽는다.
 결과는 셋으로 나눠 찍는다.
-  오류  표준에 없는 낱말, 없는 이름을 가리킴, 같은 이름이 두 번
-  빈칸  표준이 묻는 질문에 아직 답이 없음
+  오류  형식에 없는 낱말, 없는 이름을 가리킴, 같은 이름이 두 번
+  빈칸  형식이 묻는 질문에 아직 답이 없음
   미정  작성자가 `미정`으로 적어 둔 것
 PyYAML 이 필요하다 (pip install pyyaml).
 """
@@ -187,7 +187,7 @@ def load_text(text, file, offset, rep):
                     rep.error(
                         (file, line),
                         [],
-                        f"{name}은 이 표준에서 쓰지 않는다. 목록은 줄마다 `- ` 로 적고, 값이 그 기호로 시작하면 따옴표로 감싼다",
+                        f"{name}은 이 형식에서 쓰지 않는다. 목록은 줄마다 `- ` 로 적고, 값이 그 기호로 시작하면 따옴표로 감싼다",
                     )
             if isinstance(token, yaml.tokens.ScalarToken) and token.style in ("|", ">"):
                 rep.error((file, line), [], "여러 줄 글자(| 나 >)는 쓰지 않는다. 문장 목록으로 적는다")
@@ -986,7 +986,7 @@ def dot_graph(checker):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="앱 기획 표준 v0.1 검사기")
+    parser = argparse.ArgumentParser(description="앱 기획 쓰는 법 v0.1 검사기")
     parser.add_argument("paths", nargs="+", help="명세 파일이나 폴더")
     parser.add_argument("--strict", action="store_true", help="빈칸과 미정도 실패로 본다")
     parser.add_argument("--graph", action="store_true", help="화면 이동을 Mermaid 로 찍는다")

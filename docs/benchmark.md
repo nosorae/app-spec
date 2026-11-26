@@ -1,23 +1,23 @@
 # 기존 형식 벤치마크
 
-화면, 값이 있는 곳과 남는 기간, 동작, 화면 이동, 백그라운드 작업, 알림을 한 형식에 적는 공개 표준은 찾지 못했다. 다섯 종류 38개를 봤고 전부 일부만 겹친다. 그래서 [앱 기획 표준 v0.1](../SPEC.md) 을 새로 만들었고, 규칙과 낱말은 아래 형식들에서 가져왔다.
+화면, 값이 있는 곳과 남는 기간, 동작, 화면 이동, 백그라운드 작업, 알림을 한 형식에 적는 공개 표준은 찾지 못했다. 다섯 종류 38개를 봤고 전부 일부만 겹친다. 그래서 [앱 기획 쓰는 법 v0.1](../SPEC.md) 을 새로 만들었고, 규칙과 낱말은 아래 형식들에서 가져왔다.
 
-이 노트는 표준을 만들기 전에 기존 형식을 본 기록이다. 표준의 어느 규칙이 어디서 왔는지, 비슷한 형식에 무엇이 있었는지를 찾아볼 때 쓴다.
+이 노트는 형식을 만들기 전에 기존 형식을 본 기록이다. 형식의 어느 규칙이 어디서 왔는지, 비슷한 형식에 무엇이 있었는지를 찾아볼 때 쓴다.
 
-앱 기획 표준은 앱의 화면, 값, 동작을 기획자와 개발자가 한 파일에 YAML 로 적는 형식이다. 이 노트에 나오는 표준의 낱말은 다음과 같다.
+앱 기획 쓰는 법은 앱의 화면, 값, 동작을 기획자와 개발자가 한 파일에 YAML 로 적는 형식이다. 이 노트에 나오는 형식의 낱말은 다음과 같다.
 
 - `화면`, `컴포넌트`: 보이는 것. 다이얼로그는 `형태` 가 다른 화면으로 적는다
 - `상태`: 화면에 보이거나 판단에 쓰는 값. 그 값이 있는 곳(서버, 기기 저장소, 메모리)을 `소스` 에 적는다
 - `동작`: 일어나는 일. `언제`(무엇이 시작시키는가), `조건`(무엇이 맞아야 하는가), `한다`(할 일 단계)로 적는다. 단계에는 `이동`, `실행` 같은 낱말을 쓴다
 - `경우`: 조건에 따라 달라지는 모습. `로딩`, `비었음`, `오류` 는 이름이 정해져 있다
 - `미정`: 아직 못 정한 것
-- 검사 스크립트: 명세 파일을 읽어서 표준에 없는 낱말과 빠진 칸을 찾아 주는 프로그램
+- 검사 스크립트: 명세 파일을 읽어서 형식에 없는 낱말과 빠진 칸을 찾아 주는 프로그램
 
 조사일은 2026-11-11 이다. 검색은 영어와 한국어로 주제마다 한 차례씩 했다. 공개돼 있는데 못 찾은 것이 있을 수 있다.
 
 ## 가장 가까운 것 다섯
 
-표준의 목표는 화면, 컴포넌트, 값이 있는 곳과 남는 기간, 동작, 화면 이동, 백그라운드 작업, 알림을 한 형식에 적는 것이다. 빠진 것은 이 목표를 기준으로 적었다.
+형식의 목표는 화면, 컴포넌트, 값이 있는 곳과 남는 기간, 동작, 화면 이동, 백그라운드 작업, 알림을 한 형식에 적는 것이다. 빠진 것은 이 목표를 기준으로 적었다.
 
 | 형식 | 적는 것 | 빠진 것 |
 |---|---|---|
@@ -55,7 +55,7 @@
 >
 > Then steps are used to describe an expected outcome, or result.
 
-풀이. 집 자동화 설정, 요구사항 문장 틀, 테스트 시나리오 문법이 모두 "무엇이 시작시키는가, 그때 무엇이 맞아야 하는가, 무엇을 하는가" 셋으로 나눈다. 표준의 `언제`, `조건`, `한다` 가 이 셋이다. 버튼 탭, 화면 진입, 알림 탭, 백그라운드 작업을 한 모양으로 적는 것도 Home Assistant 가 모든 자동화를 이 세 칸으로 적는 데서 가져왔다.
+풀이. 집 자동화 설정, 요구사항 문장 틀, 테스트 시나리오 문법이 모두 "무엇이 시작시키는가, 그때 무엇이 맞아야 하는가, 무엇을 하는가" 셋으로 나눈다. 형식의 `언제`, `조건`, `한다` 가 이 셋이다. 버튼 탭, 화면 진입, 알림 탭, 백그라운드 작업을 한 모양으로 적는 것도 Home Assistant 가 모든 자동화를 이 세 칸으로 적는 데서 가져왔다.
 
 ### 화면, 컴포넌트, 이동
 
@@ -67,13 +67,13 @@ Shape Up 의 breadboarding ([Shape Up 4장](https://basecamp.com/shapeup/1.3-cha
 >
 > These show how the affordances take the user from place to place.
 
-풀이. 차례로 places, affordances, connection lines 의 정의다. 표준의 `화면`, `컴포넌트`, `이동` 에 해당한다. 다이얼로그와 팝업 메뉴도 place 로 치는 것을 따라서 표준도 다이얼로그와 바텀시트를 `형태` 가 다른 화면으로 적는다.
+풀이. 차례로 places, affordances, connection lines 의 정의다. 형식의 `화면`, `컴포넌트`, `이동` 에 해당한다. 다이얼로그와 팝업 메뉴도 place 로 치는 것을 따라서 형식도 다이얼로그와 바텀시트를 `형태` 가 다른 화면으로 적는다.
 
 ### 로딩, 비었음, 오류
 
 Scott Hurff 의 UI Stack ([글](https://www.scotthurff.com/posts/why-your-user-interface-is-awkward-youre-ignoring-the-ui-stack/))은 화면 하나에 상태 다섯을 빠짐없이 설계하라고 한다. 글의 절 제목이 Ideal State, Empty State, Error State, Partial State, Loading State 다.
 
-풀이. 표준은 이 가운데 셋에 정해진 이름(`로딩`, `비었음`, `오류`)을 주고 `경우` 에 적게 했다. Ideal 은 컴포넌트 본문이고, Partial 은 문장 조건으로 적는다. 서버에서 받는 값을 보여 주는 컴포넌트에 `로딩` 과 `오류` 가 없으면 검사가 빈칸으로 알린다.
+풀이. 형식은 이 가운데 셋에 정해진 이름(`로딩`, `비었음`, `오류`)을 주고 `경우` 에 적게 했다. Ideal 은 컴포넌트 본문이고, Partial 은 문장 조건으로 적는다. 서버에서 받는 값을 보여 주는 컴포넌트에 `로딩` 과 `오류` 가 없으면 검사가 빈칸으로 알린다.
 
 ### 한 번 적고 이름으로 가리키기
 
@@ -87,7 +87,7 @@ GitHub Actions ([Workflow syntax](https://docs.github.com/en/actions/reference/w
 
 > Selects an action to run as part of a step in your job.
 
-풀이. 첫째와 둘째는 OpenAPI 의 Components Object 와 Reference Object 설명이고, 셋째는 GitHub Actions 의 `uses` 설명이다. 다시 쓸 것을 한 곳에 적어 두고 다른 곳에서는 가리키기만 한다. 표준은 서버와 저장소를 `소스` 에, 여러 화면이 쓰는 값을 맨 위 `상태` 에, 여러 곳에서 하는 일을 맨 위 `동작` 에 한 번 적고 이름으로 가리킨다. `실행` 단계가 `uses` 에 해당한다. 서버 응답의 필드를 표준에 다시 적지 않고 API 문서 링크만 거는 것도 같은 생각이다.
+풀이. 첫째와 둘째는 OpenAPI 의 Components Object 와 Reference Object 설명이고, 셋째는 GitHub Actions 의 `uses` 설명이다. 다시 쓸 것을 한 곳에 적어 두고 다른 곳에서는 가리키기만 한다. 형식은 서버와 저장소를 `소스` 에, 여러 화면이 쓰는 값을 맨 위 `상태` 에, 여러 곳에서 하는 일을 맨 위 `동작` 에 한 번 적고 이름으로 가리킨다. `실행` 단계가 `uses` 에 해당한다. 서버 응답의 필드를 형식에 다시 적지 않고 API 문서 링크만 거는 것도 같은 생각이다.
 
 ### YAML 에서 쓰는 문법 줄이기
 
@@ -95,11 +95,11 @@ YAML 1.2.2 명세 ([7.3.3 Plain Style](https://yaml.org/spec/1.2.2/))
 
 > Plain scalars must never contain the “: ” and “ #” character combinations.
 
-풀이. 따옴표 없이 쓴 값 안에는 콜론 뒤 빈칸과 빈칸 뒤 샵이 올 수 없다. 표준의 따옴표 규칙(값 안에 콜론 뒤 빈칸이나 빈칸 뒤 샵이 있으면 큰따옴표로 감싼다)이 여기서 나왔다.
+풀이. 따옴표 없이 쓴 값 안에는 콜론 뒤 빈칸과 빈칸 뒤 샵이 올 수 없다. 형식의 따옴표 규칙(값 안에 콜론 뒤 빈칸이나 빈칸 뒤 샵이 있으면 큰따옴표로 감싼다)이 여기서 나왔다.
 
 YAML 1.1 의 참거짓 값 ([Boolean Language-Independent Type](https://yaml.org/type/bool.html))은 정규식이 `y|Y|yes|Yes|YES|n|N|no|No|NO` 로 시작한다.
 
-풀이. YAML 1.1 을 따르는 파서는 `yes`, `no` 를 글자가 아니라 참거짓으로 읽는다. 표준이 값으로 `예`, `아니오` 를 쓰고 모든 값을 글자로 읽는다고 정한 이유다.
+풀이. YAML 1.1 을 따르는 파서는 `yes`, `no` 를 글자가 아니라 참거짓으로 읽는다. 형식이 값으로 `예`, `아니오` 를 쓰고 모든 값을 글자로 읽는다고 정한 이유다.
 
 StrictYAML ([What YAML features does StrictYAML remove?](https://hitchdev.com/strictyaml/features-removed/))
 
@@ -109,7 +109,7 @@ StrictYAML ([What YAML features does StrictYAML remove?](https://hitchdev.com/st
 
 > Duplicate keys are allowed in regular YAML - as parsed by pyyaml, ruamel.yaml and poyo ...
 
-풀이. StrictYAML 은 YAML 을 읽을 때 놀랄 일을 줄이려고 다섯 가지를 뺐다. 자동 형 변환(`yes` 를 참으로 읽는 것 같은 일), 같은 키 두 번, 앵커(값에 이름을 붙여 두고 다른 곳에서 다시 쓰는 기능), 대괄호와 중괄호 묶음, 태그(값의 형을 지정하는 표시)다. 표준도 같은 다섯을 쓰지 않고, 검사 스크립트가 쓰인 곳을 오류로 알린다. 일반 YAML 파서는 같은 키가 두 번 나와도 그냥 읽기 때문에 검사 스크립트가 따로 잡는다. StrictYAML 은 개인이 만든 파이썬 파서이고 YAML 공식 명세가 아니다.
+풀이. StrictYAML 은 YAML 을 읽을 때 놀랄 일을 줄이려고 다섯 가지를 뺐다. 자동 형 변환(`yes` 를 참으로 읽는 것 같은 일), 같은 키 두 번, 앵커(값에 이름을 붙여 두고 다른 곳에서 다시 쓰는 기능), 대괄호와 중괄호 묶음, 태그(값의 형을 지정하는 표시)다. 형식도 같은 다섯을 쓰지 않고, 검사 스크립트가 쓰인 곳을 오류로 알린다. 일반 YAML 파서는 같은 키가 두 번 나와도 그냥 읽기 때문에 검사 스크립트가 따로 잡는다. StrictYAML 은 개인이 만든 파이썬 파서이고 YAML 공식 명세가 아니다.
 
 Maestro ([Maestro Flows](https://docs.maestro.dev/maestro-flows))
 
@@ -121,7 +121,7 @@ Maestro ([Maestro Flows](https://docs.maestro.dev/maestro-flows))
 
 GitHub Spec Kit 의 명세 템플릿([spec-template.md](https://raw.githubusercontent.com/github/spec-kit/main/templates/spec-template.md))은 모르는 것을 추측으로 채우지 말고 `NEEDS CLARIFICATION` 표시를 남기게 한다.
 
-풀이. 표준의 `미정` 이 같은 역할이다. 빈칸으로 두면 잊은 것인지 못 정한 것인지 알 수 없어서, 못 정한 것은 무엇을 정해야 하는지를 문장으로 적게 했다.
+풀이. 형식의 `미정` 이 같은 역할이다. 빈칸으로 두면 잊은 것인지 못 정한 것인지 알 수 없어서, 못 정한 것은 무엇을 정해야 하는지를 문장으로 적게 했다.
 
 ## 따라 하지 않은 것
 
@@ -131,7 +131,7 @@ Martin Fowler 사이트의 Spec Kit, Kiro 사용 후기 ([Understanding Spec-Dri
 >
 > They were repetitive, both with each other, and with the code that already existed.
 
-풀이. 기능 하나에 문서가 여러 개 생기고 내용이 겹쳐서 검토가 부담이었다는 지적이다. 같은 글은 Kiro 의 작업 순서를 작은 버그 수정에 썼을 때를 "like using a sledgehammer to crack a nut" 라고 적었다. 표준이 문서 종류를 나누지 않고 한 형식, 짧은 낱말로 간 이유다.
+풀이. 기능 하나에 문서가 여러 개 생기고 내용이 겹쳐서 검토가 부담이었다는 지적이다. 같은 글은 Kiro 의 작업 순서를 작은 버그 수정에 썼을 때를 "like using a sledgehammer to crack a nut" 라고 적었다. 형식이 문서 종류를 나누지 않고 한 형식, 짧은 낱말로 간 이유다.
 
 CAMELEON 참조 프레임워크 ([W3C 커뮤니티 위키](https://www.w3.org/community/uad/wiki/Cameleon_Reference_Framework))
 
@@ -143,11 +143,11 @@ Power Apps 소스 YAML ([Power Apps YAML](https://learn.microsoft.com/en-us/powe
 
 풀이. 화면과 컨트롤을 YAML 로 적는 가장 큰 사례다. 다만 사람이 쓰는 명세로 만든 것은 아니고, 도구가 내보내는 결과물이다.
 
-IFML 은 2013년 3월에 소프트웨어 표준 단체 OMG 의 표준이 됐다(["IFML has been adopted as a standard by OMG in March 2013."](https://www.ifml.org/)). 화면 컨테이너, 부품, 이벤트, 이동과 값 전달을 나눈 구성은 표준과 가장 닮았다. 다만 다이어그램이 기본 표기이고 파일로 주고받는 형식은 XML 의 한 종류인 XMI 라서, 글로 손쉽게 쓰는 형식이라는 목표와 맞지 않았다.
+IFML 은 2013년 3월에 소프트웨어 표준 단체 OMG 의 표준이 됐다(["IFML has been adopted as a standard by OMG in March 2013."](https://www.ifml.org/)). 화면 컨테이너, 부품, 이벤트, 이동과 값 전달을 나눈 구성은 형식과 가장 닮았다. 다만 다이어그램이 기본 표기이고 파일로 주고받는 형식은 XML 의 한 종류인 XMI 라서, 글로 손쉽게 쓰는 형식이라는 목표와 맞지 않았다.
 
 ## 본 형식 38개
 
-빠진 것은 표준의 목표(화면, 컴포넌트, 값이 있는 곳과 남는 기간, 동작, 이동, 백그라운드 작업, 알림을 한 형식에) 기준이고, 열어 본 문서에 없었다는 뜻이다.
+빠진 것은 형식의 목표(화면, 컴포넌트, 값이 있는 곳과 남는 기간, 동작, 이동, 백그라운드 작업, 알림을 한 형식에) 기준이고, 열어 본 문서에 없었다는 뜻이다.
 
 ### AI 코딩 도구용 명세 6개
 
